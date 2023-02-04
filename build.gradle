@@ -4,9 +4,9 @@ plugins {
     id 'net.minecraftforge.gradle' version '5.1.+'
 }
 
-version = '1.2.0-1.19.2'
+version = '1.2.0'
 group = 'net.anvian.sculkhornid'
-archivesBaseName = 'sculkhornid'
+archivesBaseName = 'SculkHorn-1.19.2'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 

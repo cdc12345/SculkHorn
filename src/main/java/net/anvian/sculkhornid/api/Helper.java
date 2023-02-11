@@ -11,8 +11,11 @@ import net.minecraft.util.math.Box;
 import java.util.List;
 
 public class Helper {
+    public static float ticksToSeconds(int cooldown){
+        return (float)cooldown / 40;
+    }
 
-    public static void causeMagicExplosionAttack(LivingEntity user, LivingEntity victim, float damageAmount, float distance){
+    public static void causeSonicBoomAttack(LivingEntity user, LivingEntity victim, float damageAmount, float distance){
         DamageSource magicExplosion = DamageSource.explosion(user).setExplosive();
         for (LivingEntity nearbyEntity : getAoeTargets(victim, user, distance)) {
             nearbyEntity.damage(magicExplosion, damageAmount);

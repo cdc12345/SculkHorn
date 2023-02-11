@@ -1,7 +1,10 @@
 package net.anvian.sculkhornid.item.custom;
 
 import net.anvian.sculkhornid.SculkHornMod;
+import net.anvian.sculkhornid.api.Helper;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -47,7 +50,15 @@ public class SculkHornSonicBoom extends Item{
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("tootip_sculkhorn_distance"));
+        if (Screen.hasShiftDown()){
+            tooltip.add(Math.min(1, tooltip.size()), Text.of(I18n.translate("tooltip.distance", DISTANCE)));
+            tooltip.add(Math.min(1, tooltip.size()), Text.of(I18n.translate("tooltip.cooldown.distance", Helper.ticksToSeconds(COOLDOWN))));
+            tooltip.add(Math.min(1, tooltip.size()), Text.of(I18n.translate("tooltip.damage.distance", DAMAGE)));
+        }else {
+            tooltip.add(Math.min(1, tooltip.size()), Text.of(I18n.translate("tooltip_info_item.sculkhorn_shif")));
+        }
+        tooltip.add(Math.min(1, tooltip.size()), Text.of(I18n.translate("null")));
+        tooltip.add(Math.min(1, tooltip.size()), Text.of(I18n.translate("tootip_sculkhorn_distance")));
     }
 
     @Override
@@ -113,7 +124,6 @@ public class SculkHornSonicBoom extends Item{
         // Don't hit ourselves
         hit.remove(user);
 
-        // Find
         for (Entity hitTarget : hit) {
             if(hitTarget instanceof LivingEntity living) {
                 living.damage(DamageSource.sonicBoom(user), DAMAGE);//7.75

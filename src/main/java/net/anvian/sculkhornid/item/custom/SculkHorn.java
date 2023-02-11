@@ -2,7 +2,9 @@ package net.anvian.sculkhornid.item.custom;
 
 import net.anvian.sculkhornid.SculkHornMod;
 import net.anvian.sculkhornid.api.Helper;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -34,7 +36,15 @@ public class SculkHorn extends Item{
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("tootip_sculkhorn_area"));
+        if (Screen.hasShiftDown()){
+            tooltip.add(Math.min(1, tooltip.size()), Text.of(I18n.translate("tooltip.radius", RADIUS)));
+            tooltip.add(Math.min(1, tooltip.size()), Text.of(I18n.translate("tooltip.cooldown.area", Helper.ticksToSeconds(COOLDOWN))));
+            tooltip.add(Math.min(1, tooltip.size()), Text.of(I18n.translate("tooltip.damage.area", DAMAGE)));
+        }else {
+            tooltip.add(Math.min(1, tooltip.size()), Text.of(I18n.translate("tooltip_info_item.sculkhorn_shif")));
+        }
+        tooltip.add(Math.min(1, tooltip.size()), Text.of(I18n.translate("null")));
+        tooltip.add(Math.min(1, tooltip.size()), Text.of(I18n.translate("tootip_sculkhorn_area")));
     }
 
     @Override
@@ -48,7 +58,7 @@ public class SculkHorn extends Item{
                     itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
                 }
                 sonicBoom(user, user, RADIUS);
-                Helper.causeMagicExplosionAttack(user, user, DAMAGE, RADIUS);
+                Helper.causeSonicBoomAttack(user, user, DAMAGE, RADIUS);
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED,60,0));
                 user.getItemCooldownManager().set(this, COOLDOWN);
             }

@@ -26,7 +26,7 @@ public class ModItems {
                     .rarity(Rarity.EPIC)
                     .stacksTo(1)
                     .durability(500)
-                    .tab(ItemGroup.SCULKHORN),7.0f));
+                    .tab(ItemGroup.SCULKHORN)));
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);

@@ -8,9 +8,6 @@ import io.wispforest.owo.config.annotation.Sync;
 @Sync(Option.SyncMode.OVERRIDE_CLIENT)
 public class ModConfigs{
  //sculk horn area
- public double AREA_DAMAGE_EASY = 9;
- public double AREA_DAMAGE_NORMAL = 15;
- public double AREA_DAMAGE_HARD = 22.5;
  public double AREA_DAMAGE = 12;
  public double AREA_RADIUS = 3.5;
  public int AREA_COOLDOWN = 300;

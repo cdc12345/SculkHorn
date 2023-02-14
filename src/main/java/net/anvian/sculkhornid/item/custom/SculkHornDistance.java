@@ -35,16 +35,14 @@ import java.util.List;
 import java.util.Set;
 
 public class SculkHornDistance extends Item {
+
     public SculkHornDistance(Properties properties) {
         super(properties);
     }
     float DAMAGE = ModConfigDistance.DISTANCE_DAMAGE.get().floatValue();
     int DISTANCE = ModConfigDistance.DISTANCE_DISTANCE.get();
     int COOLDOWN =  ModConfigDistance.DISTANCE_COOLDOWN.get();
-    @Override
-    public boolean isFoil(ItemStack itemStack) {
-        return true;
-    }
+
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> list, TooltipFlag tooltipFlag) {
         if (Screen.hasShiftDown()){
@@ -57,6 +55,7 @@ public class SculkHornDistance extends Item {
         list.add(Math.min(1, list.size()),Component.nullToEmpty(I18n.get("null")));
         list.add(Math.min(1, list.size()),Component.nullToEmpty(I18n.get("tootip_sculkhorn_distance")));
     }
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if(player.experienceLevel>= ModConfigDistance.DISTANCE_EXPERIENCE_LEVEL.get() || player.isCreative()){
@@ -64,6 +63,7 @@ public class SculkHornDistance extends Item {
         }
         return super.use(level, player, hand);
     }
+
     @Override
     public UseAnim getUseAnimation(ItemStack itemStack) {
         return UseAnim.BOW;
